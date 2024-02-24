@@ -10,5 +10,12 @@ function checkPassword() {
 }
 
 function openCustomPage() {
-    const newWindow = window.open("home.html", "_blank");
+    const newWindow = window.open("about:blank", "_blank");
+    
+    newWindow.addEventListener("load", function() {
+        fetch("home.html")
+            .then(response => response.text())
+            .then(html => newWindow.document.write(html))
+            .catch(error => console.error("Error loading content:", error));
+    });
 }
